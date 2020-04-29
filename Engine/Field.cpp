@@ -88,7 +88,6 @@ void Field::PushPiece( int x,int y,char state )
 
 void Field::OnFullLine()
 {
-	bool exit = false;
 	for( int y = 0; y < height-1; y++ )
 	{
 		for( int x = 1; x < width; x++ )
