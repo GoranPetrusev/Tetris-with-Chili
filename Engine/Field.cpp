@@ -124,4 +124,5 @@ void Field::OnGameOver()
 			for( int x = 0; x < width; x++ )
 				pField[y * width + x] = (x == 0 || x == width - 1 || y == height - 1)?'#':' ';
 	}
+	piecesOnTop = 0;
 }

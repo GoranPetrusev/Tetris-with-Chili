@@ -112,10 +112,10 @@ void Game::UpdateModel()
                 }
             }
             f.OnFullLine();
-            f.OnGameOver();
             t.Init( tID( rng ) );
         }
 
+        f.OnGameOver();
         tickCounter = 0;
     }
 
