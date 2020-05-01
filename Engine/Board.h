@@ -13,7 +13,7 @@ public:
 		void Init( int in_ID );
 		void Fall();
 		void Move( Keyboard& kbd );
-		void DrawCube( Graphics& gfx );
+		void DrawCube( Location& loc,Color c,Graphics& gfx );
 		bool MoveAvaliable( Board& brd, Location& delta_loc );
 	private:
 		int RotateMatrix( Location& loc,int r );
@@ -34,4 +34,5 @@ private:
 	static constexpr int width = 10;
 	static constexpr int height = 20;
 	char* pBoard = new char[width * height];
+	Tetromino& t;
 };

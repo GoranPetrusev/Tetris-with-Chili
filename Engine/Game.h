@@ -23,6 +23,7 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "Graphics.h"
+#include "Board.h"
 #include <random>
 
 class Game
@@ -39,4 +40,6 @@ private:
 private:
 	MainWindow& wnd;
 	Graphics gfx;
+
+    Board game;
 };
