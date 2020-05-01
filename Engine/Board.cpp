@@ -13,5 +13,5 @@ void Board::Draw( Graphics& gfx )
 {
 	for( int x = 0; x < width; x++ )
 		for( int y = 0; y < height; y++ )
-			t.DrawCube( Location{ x,y },Colors::Green,gfx );
+			t.DrawCube( Location{ x,y },Colors::Red,gfx );
 }

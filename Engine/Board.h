@@ -10,16 +10,18 @@ public:
 	class Tetromino
 	{
 	public:
+		Tetromino();
 		void Init( int in_ID );
 		void Fall();
+		void Rotate( Keyboard& kbd );
 		void Move( Keyboard& kbd );
 		void DrawCube( Location& loc,Color c,Graphics& gfx );
-		bool MoveAvaliable( Board& brd, Location& delta_loc );
+		bool MoveAvaliable( Board& brd, Location& delta_loc, int delta_rot );
 	private:
-		int RotateMatrix( Location& loc,int r );
+		int RotatedMatrix( Location& loc,int r );
 		int ID;
 		int CurrenRotation = 0;
-		Location loc;
+		Location loc = { 5,2 };
 		static constexpr int dimensions = 20;
 		std::string tetrominos[7];
 	};
