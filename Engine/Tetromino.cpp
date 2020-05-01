@@ -55,31 +55,36 @@ void Board::Tetromino::Fall()
 	loc.y--;
 }
 
-void Board::Tetromino::Rotate( Keyboard& kbd )
+void Board::Tetromino::Rotate( Keyboard& kbd,Board& brd )
 {
 	if( kbd.KeyIsPressed( 'Z' ) && ID != 3 )
 	{
-		// check if avaliable
-		// rotate clockwise
+		if( DoesPieceFit( brd,Location{ 0,0 },1 ) )
+			nCurrentRotation++;
 	}
 	if( kbd.KeyIsPressed( 'X' ) && ID != 3 )
 	{
-		// check if avaliable
-		// rotate clockwise
+		if( DoesPieceFit( brd,Location{ 0,0 },-1 ) )
+		{
+			if( nCurrentRotation == 0 )
+				nCurrentRotation = 3;
+			else
+				nCurrentRotation--;
+		}
 	}
 }
 
-void Board::Tetromino::Move( Keyboard& kbd )
+void Board::Tetromino::Move( Keyboard& kbd,Board& brd )
 {
 	if( kbd.KeyIsPressed( VK_LEFT ) )
 	{
-		// check if avaliable
-		// move left
+		if( DoesPieceFit( brd,Location{ -1,0 },0 ) )
+			loc.x--;
 	}
 	if( kbd.KeyIsPressed( VK_RIGHT ) )
 	{
-		// check if avaliable
-		// move right
+		if( DoesPieceFit( brd,Location{ 1,0 },0 ) )
+			loc.x++;
 	}
 }
 
@@ -93,7 +98,7 @@ void Board::Tetromino::DrawTetromino( Graphics& gfx )
 	for( int x = 0; x < 5; x++ )
 		for( int y = 0; y < 5; y++ )
 			if( tetrominos[ID][y * 5 + x] == 'O' )
-				DrawCube( Location{ x + loc.x,y + loc.y },Colors::Blue );
+				DrawCube( Location{ x + loc.x,y + loc.y },Colors::Blue,gfx );
 
 }
 

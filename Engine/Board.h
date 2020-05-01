@@ -13,12 +13,12 @@ private:
 		Tetromino();
 		void Init( int in_ID );
 		void Fall();
-		void Rotate( Keyboard& kbd );
-		void Move( Keyboard& kbd );
+		void Rotate( Keyboard& kbd,Board& brd );
+		void Move( Keyboard& kbd,Board& brd );
 		void DrawCube( Location& loc,Color c,Graphics& gfx );
 		void DrawTetromino( Graphics& gfx );
 	private:
-		bool DoesPieceFit( Board& brd, Location& delta_loc, int delta_rot );
+		bool DoesPieceFit( Board& brd,Location& delta_loc,int delta_rot );
 		int RotatedMatrix( Location& index,int r );
 		int ID;
 		int nCurrentRotation = 0;
@@ -32,10 +32,16 @@ private:
 
 	// Functions
 	void Draw( Graphics& gfx );
+	void DynamicUpdate( Keyboard& kbd,Board& brd );
+	void FixedUpdate( Keyboard& kbd,Board& brd );
 
 private:
 	static constexpr int width = 10;
 	static constexpr int height = 20;
 	char* pBoard = new char[width * height];
 	Tetromino& t;
+
+	// Timers
+	static constexpr int nUpdatePeriod = 20;
+	int nTimer = 0;
 };
