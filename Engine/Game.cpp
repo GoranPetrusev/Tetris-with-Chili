@@ -23,9 +23,10 @@
 #include <random>
 
 Game::Game( MainWindow& wnd )
-	:
-	wnd( wnd ),
-	gfx( wnd )
+    :
+    wnd( wnd ),
+    gfx( wnd ),
+    game( game )
 {
 }
 
@@ -39,6 +40,8 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+    game.DynamicUpdate( wnd.kbd,game );
+    game.FixedUpdate( wnd.kbd,game );
 }
 
 void Game::ComposeFrame()

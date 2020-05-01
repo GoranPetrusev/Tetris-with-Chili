@@ -20,13 +20,14 @@ private:
 	private:
 		bool DoesPieceFit( Board& brd,Location& delta_loc,int delta_rot );
 		int RotatedMatrix( Location& index,int r );
-		int ID;
+		int ID = 0;
 		int nCurrentRotation = 0;
-		Location loc = { 5,2 };
+		Location pos = { 5,5 };
 		static constexpr int dimensions = 20;
 		std::string tetrominos[7];
 	};
 
+public:
 	// Constructor
 	Board();
 
