@@ -2,6 +2,8 @@
 
 Board::Tetromino::Tetromino()
 {
+	ID = 0;
+
 	tetrominos[0].append( "....." );
 	tetrominos[0].append( "....." );
 	tetrominos[0].append( "..OO." );

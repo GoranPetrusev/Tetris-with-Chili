@@ -1,8 +1,6 @@
 #include "Board.h"
 
 Board::Board()
-	:
-	t( t )
 {
 	for( int x = 0; x < width; x++ )
 		for( int y = 0; y < height; y++ )
@@ -18,8 +16,8 @@ void Board::Draw( Graphics& gfx )
 	t.DrawTetromino( gfx );
 }
 
-void Board::DynamicUpdate( Keyboard& kbd,Board& brd )
+void Board::DynamicUpdate( Keyboard& kbd )
 {
-	t.Move( kbd,brd );
-	t.Rotate( kbd,brd );
+	t.Move( kbd,*this );
+	t.Rotate( kbd,*this );
 }

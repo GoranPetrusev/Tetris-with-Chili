@@ -20,9 +20,9 @@ private:
 	private:
 		bool DoesPieceFit( Board& brd,Location& delta_loc,int delta_rot );
 		int RotatedMatrix( Location& index,int r );
-		int ID = 0;
+		int ID;
 		int nCurrentRotation = 0;
-		Location pos = { 5,5 };
+		Location pos = { 5,3 };
 		static constexpr int dimensions = 20;
 		std::string tetrominos[7];
 	};
@@ -33,16 +33,18 @@ public:
 
 	// Functions
 	void Draw( Graphics& gfx );
-	void DynamicUpdate( Keyboard& kbd,Board& brd );
-	void FixedUpdate( Keyboard& kbd,Board& brd );
+	void DynamicUpdate( Keyboard& kbd );
+	void FixedUpdate( Keyboard& kbd );
 
 private:
 	static constexpr int width = 10;
 	static constexpr int height = 20;
 	char* pBoard = new char[width * height];
-	Tetromino& t;
+	Tetromino t;
 
-	// Timers
+	// Dynamic Timers
 	static constexpr int nUpdatePeriod = 20;
 	int nTimer = 0;
+
+	// Fixed Timers
 };

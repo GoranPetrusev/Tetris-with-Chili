@@ -40,8 +40,7 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-    game.DynamicUpdate( wnd.kbd,game );
-    game.FixedUpdate( wnd.kbd,game );
+    game.DynamicUpdate( wnd.kbd );
 }
 
 void Game::ComposeFrame()
