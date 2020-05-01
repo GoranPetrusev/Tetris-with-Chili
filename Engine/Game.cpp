@@ -26,10 +26,6 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-    brd( gfx ),
-    tID( 0,6 ),
-    t( 5 ),
-	rng( std::random_device()() )
 {
 }
 
@@ -43,89 +39,8 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-    if( inputCounter >= inputPeriod )
-    {
-        if( wnd.kbd.KeyIsPressed( VK_LEFT ) )
-        {
-            if( !t.CheckCollision( f,Location{ -1,0 },0 ) && (delayCounterL == 0 || delayCounterL >= delayPeriod) )
-                t.Move( Location{ -1,0 } );
-            delayCounterL++;
-        }
-        else
-        {
-            delayCounterL = 0;
-        }
-
-        if( wnd.kbd.KeyIsPressed( VK_RIGHT ) )
-        {
-            if( !t.CheckCollision( f,Location{ 1,0 },0 ) && (delayCounterR == 0 || delayCounterR >= delayPeriod) )
-                t.Move( Location{ 1,0 } );
-            delayCounterR++;
-        }
-        else
-        {
-            delayCounterR = 0;
-        }
-
-
-        if( wnd.kbd.KeyIsPressed( VK_DOWN ) )
-        {
-            if( !t.CheckCollision( f,Location{ 0,1 },0 ))
-                t.Move( Location{ 0,1 } );
-        }
-
-        inputCounter = 0;
-    }
-
-    if( wnd.kbd.KeyIsPressed( 'Z' ) )
-    {
-        if( !lockRotation )
-        {
-            if( !t.CheckCollision( f,Location{ 0,0 },1 ) )
-                t.Rotate();
-
-            lockRotation = true;
-        }
-    }
-    else
-    {
-        lockRotation = false;
-    }
-
-    if( tickCounter >= tickPeriod )
-    {
-        if( !t.CheckCollision( f,Location{ 0,1 },0 ) )
-        {
-            t.Fall();
-        }
-        else
-        {
-            for( int y = 0; y < 4; y++ )
-            {
-                for( int x = 0; x < 4; x++ )
-                {
-                    if( t.GetStateAt( x,y ) == 'X' )
-                    {
-                        char state = 54 - t.GetID();
-                        f.PushPiece( t.GetX() - f.xOffset + x,t.GetY() - f.yOffset + y, state );
-                    }
-                }
-            }
-            f.OnFullLine();
-            t.Init( tID( rng ) );
-        }
-
-        f.OnGameOver();
-        tickCounter = 0;
-    }
-
-    inputCounter++;
-    if( !fastDrop )
-        tickCounter++;
 }
 
 void Game::ComposeFrame()
 {
-    f.DrawField( brd );
-    t.Draw( brd );
 }

@@ -1,20 +1,37 @@
 #pragma once
 
-#include "Graphics.h"
 #include "Location.h"
+#include "Graphics.h"
+#include "Keyboard.h"
 
 class Board
 {
 public:
-	Board( Graphics& gfx );
-	void DrawCell( const Location& loc,Color c );
-	void DrawCellBorder( const Location& loc,int bWidth,Color cSolid,Color cBorder );
-	int GetWidth() const;
-	int GetHeight() const;
-public:
-	static constexpr int width = 39;
-	static constexpr int height = 30;
+	class Tetromino
+	{
+	public:
+		void Init( int in_ID );
+		void Fall();
+		void Move( Keyboard& kbd );
+		void DrawCube( Graphics& gfx );
+		bool MoveAvaliable( Board& brd, Location& delta_loc );
+	private:
+		int RotateMatrix( Location& loc,int r );
+		int ID;
+		int CurrenRotation = 0;
+		Location loc;
+		static constexpr int dimensions = 20;
+		std::string tetrominos[7];
+	};
+
+	// Constructor
+	Board();
+
+	// Functions
+	void Draw( Graphics& gfx );
+
 private:
-	static constexpr int dimension = 20;
-	Graphics& gfx;
+	static constexpr int width = 10;
+	static constexpr int height = 20;
+	char* pBoard = new char[width * height];
 };

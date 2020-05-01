@@ -23,9 +23,6 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "Graphics.h"
-#include "Board.h"
-#include "Field.h"
-#include "Tetromino.h"
 #include <random>
 
 class Game
@@ -42,19 +39,4 @@ private:
 private:
 	MainWindow& wnd;
 	Graphics gfx;
-
-    Board brd;
-    Field f;
-    Tetromino t;
-    std::mt19937 rng;
-    std::uniform_int_distribution<int> tID;
-    int tickPeriod = 40;
-    int tickCounter = 0;
-    int inputPeriod = 3;
-    int inputCounter = 0;
-    int delayPeriod = 5;
-    int delayCounterL = 0;
-    int delayCounterR = 0;
-    bool lockRotation = false;
-    bool fastDrop = false;
 };
