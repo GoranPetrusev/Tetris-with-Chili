@@ -16,11 +16,12 @@ private:
 		void Rotate( Keyboard& kbd );
 		void Move( Keyboard& kbd );
 		void DrawCube( Location& loc,Color c,Graphics& gfx );
+		void DrawTetromino( Graphics& gfx );
 	private:
-		bool CheckCollision( Board& brd, Location& delta_loc, int delta_rot );
-		int RotatedMatrix( Location& loc,int r );
+		bool DoesPieceFit( Board& brd, Location& delta_loc, int delta_rot );
+		int RotatedMatrix( Location& index,int r );
 		int ID;
-		int CurrenRotation = 0;
+		int nCurrentRotation = 0;
 		Location loc = { 5,2 };
 		static constexpr int dimensions = 20;
 		std::string tetrominos[7];

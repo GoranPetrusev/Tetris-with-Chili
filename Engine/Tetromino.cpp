@@ -60,7 +60,7 @@ void Board::Tetromino::Rotate( Keyboard& kbd )
 	if( kbd.KeyIsPressed( 'Z' ) && ID != 3 )
 	{
 		// check if avaliable
-		// rotate counter clockwise
+		// rotate clockwise
 	}
 	if( kbd.KeyIsPressed( 'X' ) && ID != 3 )
 	{
@@ -88,7 +88,49 @@ void Board::Tetromino::DrawCube( Location& loc,Color c,Graphics& gfx )
 	gfx.DrawRectDim( loc.x*dimensions,loc.y*dimensions,dimensions,dimensions,c );
 }
 
-int Board::Tetromino::RotatedMatrix( Location& loc,int r )
+void Board::Tetromino::DrawTetromino( Graphics& gfx )
 {
+	for( int x = 0; x < 5; x++ )
+		for( int y = 0; y < 5; y++ )
+			if( tetrominos[ID][y * 5 + x] == 'O' )
+				DrawCube( Location{ x + loc.x,y + loc.y },Colors::Blue );
+
+}
+
+bool Board::Tetromino::DoesPieceFit( Board& brd,Location& delta_loc,int delta_rot )
+{
+	for( int x = 0; x < 5; x++ )
+	{
+		for( int y = 0; y < 5; y++ )
+		{
+			// Index into piece
+			int pi = RotatedMatrix( Location{ x,y },nCurrentRotation - delta_rot );
+
+			// Index into board
+			int fi = (x + loc.x + delta_loc.x) * width + (y + loc.y + delta_loc.y);
+
+			if( x + delta_loc.x >= 0 && x + delta_loc.x < width )
+			{
+				if( y + delta_loc.y >= 0 && y + delta_loc.y < height )
+				{
+					if( brd.pBoard[fi] != ' ' && tetrominos[ID][pi] == 'O' )
+						return true;
+				}
+			}
+		}
+	}
+
+	return false;
+}
+
+int Board::Tetromino::RotatedMatrix( Location& index,int r )
+{
+	switch( r % 4 )
+	{
+	case 0: return loc.y * 4 + loc.x;			// 0 degrees
+	case 1: return 12 + loc.y - (loc.x * 4);	// 90 degrees
+	case 2:	return 15 - (loc.y * 4) - loc.x;	// 180 degrees
+	case 3: return 3 - loc.y + (loc.x * 4);		// 270 degrees
+	}
 	return 0;
 }
