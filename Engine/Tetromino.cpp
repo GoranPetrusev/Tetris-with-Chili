@@ -87,3 +87,8 @@ void Board::Tetromino::DrawCube( Location& loc,Color c,Graphics& gfx )
 {
 	gfx.DrawRectDim( loc.x*dimensions,loc.y*dimensions,dimensions,dimensions,c );
 }
+
+int Board::Tetromino::RotatedMatrix( Location& loc,int r )
+{
+	return 0;
+}

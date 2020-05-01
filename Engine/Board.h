@@ -6,7 +6,7 @@
 
 class Board
 {
-public:
+private:
 	class Tetromino
 	{
 	public:
@@ -16,8 +16,8 @@ public:
 		void Rotate( Keyboard& kbd );
 		void Move( Keyboard& kbd );
 		void DrawCube( Location& loc,Color c,Graphics& gfx );
-		bool MoveAvaliable( Board& brd, Location& delta_loc, int delta_rot );
 	private:
+		bool CheckCollision( Board& brd, Location& delta_loc, int delta_rot );
 		int RotatedMatrix( Location& loc,int r );
 		int ID;
 		int CurrenRotation = 0;
